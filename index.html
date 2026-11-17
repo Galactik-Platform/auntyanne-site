@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aunty Anne · Founding families</title>
+<meta name="description" content="Cara is an AI companion who phones someone you love for a friendly chat and a simple game. Join the founding families waitlist.">
+<style>
+  :root {
+    --paper: #f6f1e7;
+    --paper-deep: #efe6d3;
+    --ink: #1f2a24;
+    --ink-soft: #4a564f;
+    --green: #2f5a46;
+    --clay: #b4532a;
+    --line: #d9ccb2;
+    --focus: #1d4ed8;
+    --radius: 6px;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: -apple-system, "Segoe UI", system-ui, Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { font-size: 112.5%; }               /* 18px base: readable for buyers 40–70 */
+  body { margin: 0; background: var(--paper); color: var(--ink); font: 1rem/1.6 var(--sans); }
+  a { color: var(--green); text-underline-offset: 3px; }
+  a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+    outline: 3px solid var(--focus); outline-offset: 2px;
+  }
+  .wrap { max-width: 64rem; margin: 0 auto; padding: 0 1rem; }
+  .skip { position: absolute; left: -999px; }
+  .skip:focus { left: 1rem; top: 1rem; background: #fff; padding: .5rem 1rem; z-index: 10; }
+
+  header { padding: 1.5rem 0 0; }
+  .mark { font: 600 1.35rem/1 var(--serif); letter-spacing: .01em; color: var(--green); text-decoration: none; }
+  .mark span { color: var(--clay); }
+
+  .hero { display: grid; gap: 2.5rem; padding: 3rem 0 3.5rem; grid-template-columns: 1fr; }
+  @media (min-width: 52rem) { .hero { grid-template-columns: 1.15fr .85fr; align-items: start; } }
+  h1 { font: 500 clamp(2rem, 5vw, 3.1rem)/1.12 var(--serif); margin: 0 0 1.25rem; letter-spacing: -.01em; }
+  .lede { font-size: 1.15rem; color: var(--ink-soft); max-width: 34rem; margin: 0 0 1.5rem; }
+  .ai-note { display: inline-block; border-left: 4px solid var(--clay); padding: .25rem 0 .25rem .9rem;
+             font-size: .95rem; color: var(--ink); margin: 0; }
+
+  .offer { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; }
+  .offer h2 { font: 600 1.25rem/1.3 var(--serif); margin: 0 0 .25rem; }
+  .offer .price { font: 500 2.4rem/1 var(--serif); margin: 1rem 0 .25rem; }
+  .offer .price small { font: 400 1rem var(--sans); color: var(--ink-soft); }
+  .offer ul { padding-left: 1.1rem; margin: 1rem 0 0; }
+  .offer li { margin: .4rem 0; }
+  .offer .fine { font-size: .85rem; color: var(--ink-soft); margin-top: 1rem; }
+
+  section { padding: 3rem 0; border-top: 1px solid var(--line); }
+  h2.sec { font: 500 1.7rem/1.2 var(--serif); margin: 0 0 1.5rem; }
+  .steps { list-style: none; counter-reset: s; padding: 0; margin: 0; display: grid; gap: 1.5rem; }
+  @media (min-width: 46rem) { .steps { grid-template-columns: repeat(3, 1fr); } }
+  .steps li { counter-increment: s; }
+  .steps li::before { content: counter(s); display: block; font: 500 2rem/1 var(--serif); color: var(--clay); margin-bottom: .5rem; }
+  .steps h3 { font-size: 1.05rem; margin: 0 0 .35rem; }
+  .steps p { margin: 0; color: var(--ink-soft); }
+
+  .honest { background: var(--paper-deep); }
+  .honest dl { display: grid; gap: 1.25rem 2rem; margin: 0; }
+  @media (min-width: 46rem) { .honest dl { grid-template-columns: 1fr 1fr; } }
+  .honest dt { font-weight: 650; }
+  .honest dd { margin: .2rem 0 0; color: var(--ink-soft); }
+
+  form { display: grid; gap: 1.1rem; max-width: 34rem; }
+  label { font-weight: 600; display: block; margin-bottom: .3rem; }
+  .hint { display: block; font-weight: 400; font-size: .88rem; color: var(--ink-soft); }
+  input[type=text], input[type=email], select {
+    width: 100%; font: inherit; padding: .7rem .8rem; border: 1px solid #a8977a; border-radius: var(--radius); background: #fff; color: var(--ink);
+  }
+  .check { display: grid; grid-template-columns: 1.4rem 1fr; gap: .6rem; align-items: start; font-weight: 400; }
+  .check input { width: 1.25rem; height: 1.25rem; margin: .2rem 0 0; accent-color: var(--green); }
+  button { font: 600 1.05rem var(--sans); background: var(--green); color: #fff; border: 0; border-radius: var(--radius);
+           padding: .9rem 1.4rem; cursor: pointer; justify-self: start; }
+  button:hover { background: #24493a; }
+  .pot { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  button:disabled { opacity: .6; cursor: progress; }
+  .no-health { font-size: .9rem; color: var(--clay); margin: 0; }
+  .status { font-size: .95rem; padding: .8rem 1rem; border-radius: var(--radius); display: none; }
+  .status[data-kind=ok] { display: block; background: #e3efe7; color: var(--green); }
+  .status[data-kind=error] { display: block; background: #f7e4dc; color: #8a3517; }
+
+  footer { border-top: 1px solid var(--line); padding: 2rem 0 3rem; font-size: .85rem; color: var(--ink-soft); }
+  footer p { margin: .3rem 0; }
+</style>
+</head>
+<body>
+<a class="skip" href="#join">Skip to the waitlist form</a>
+<header class="wrap">
+  <a class="mark" href="#">Aunty Anne<span>.</span></a>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <h1>A friendly phone call for someone you love, even on the days you can’t ring.</h1>
+      <p class="lede">Cara rings your mum, dad, or the relative who lives alone, for a chat about their day and a gentle game of words or memories. You choose when. They choose whether.</p>
+      <p class="ai-note"><strong>Cara is an AI companion, not a person.</strong> She says so at the start of every call.</p>
+    </div>
+
+    <aside class="offer" aria-labelledby="offer-h">
+      <h2 id="offer-h">Founding families</h2>
+      <p style="margin:0;color:var(--ink-soft)">Places for our first 20 families</p>
+      <p class="price">£29 <small>a month</small></p>
+      <ul>
+        <li>About two chats a week (100 minutes a month)</li>
+        <li>Your price stays the same for 12 months</li>
+        <li>A personal set-up call with us</li>
+        <li>30-day money-back guarantee</li>
+      </ul>
+      <p class="fine">Joining the waitlist is free and doesn’t commit you to anything. We’ll email you when your place is ready.</p>
+      <p style="margin:1rem 0 0"><a href="#join">Join the waitlist</a></p>
+    </aside>
+  </div>
+
+  <section aria-labelledby="how-h">
+    <div class="wrap">
+      <h2 class="sec" id="how-h">How it works</h2>
+      <ol class="steps">
+        <li><h3>You set it up</h3><p>Tell us who Cara should ring and when. We’ll help you on a short call.</p></li>
+        <li><h3>They decide</h3><p>On the first call Cara explains who she is and asks if they’d like her to ring again. No means no.</p></li>
+        <li><h3>You stay in touch</h3><p>After each call you get a short note, like “a lovely chat about the garden”. Not the recording.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="honest" aria-labelledby="honest-h">
+    <div class="wrap">
+      <h2 class="sec" id="honest-h">The honest bits</h2>
+      <dl>
+        <div><dt>Cara is a computer</dt><dd>She’s warm and patient, but she isn’t a person, and she never pretends to be.</dd></div>
+        <div><dt>“Stop” always works</dt><dd>If the person Cara calls says stop, the calls stop. Only they, or someone with legal authority for them, can start them again.</dd></div>
+        <div><dt>Not an emergency service</dt><dd>If something sounds wrong, Cara tells them to call 999 and lets you know straight away.</dd></div>
+        <div><dt>Never asks for money</dt><dd>Cara never asks for money, bank details or passwords. Anyone who does isn’t Cara.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="join" aria-labelledby="join-h">
+    <div class="wrap">
+      <h2 class="sec" id="join-h">Join the founding families waitlist</h2>
+      <form id="waitlist" novalidate>
+        <div>
+          <label for="name">Your first name</label>
+          <input id="name" name="name" type="text" autocomplete="given-name" required>
+        </div>
+        <div>
+          <label for="email">Your email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <div>
+          <label for="rel">Who would Cara ring? <span class="hint">Optional</span></label>
+          <select id="rel" name="relationship">
+            <option value="">Prefer not to say</option>
+            <option>My mum or dad</option>
+            <option>A grandparent</option>
+            <option>Another relative</option>
+            <option>A friend or neighbour</option>
+            <option>Myself</option>
+          </select>
+        </div>
+        <div>
+          <label for="area">Postcode area <span class="hint">Optional. Just the first part, e.g. N14. It helps us plan local set-up visits.</span></label>
+          <input id="area" name="postcode_area" type="text" inputmode="text" maxlength="4" autocomplete="off">
+        </div>
+        <p class="no-health">Please don’t tell us anything about their health here. We don’t need it yet.</p>
+        <label class="check"><input id="consent" name="consent" type="checkbox" required>
+          <span>Email me when my founding-family place is ready, and with occasional updates before launch. I can unsubscribe any time. See the <a href="privacy.html">waitlist privacy notice</a>.</span></label>
+        <div class="pot" aria-hidden="true"><label for="website">Leave this empty</label><input id="website" name="website" type="text" tabindex="-1" autocomplete="off"></div>
+        <button type="submit">Join the waitlist</button>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Aunty Anne is a service from Galactik Ltd, registered in England and Wales, company number 17104671.<br>
+       Registered office: 133 Chase Side, London N14 5HD. Questions: <a href="mailto:AuntyAnne@galactik.tech">AuntyAnne@galactik.tech</a></p>
+    <p><a href="privacy.html">Waitlist privacy notice</a></p>
+  </div>
+</footer>
+
+<script>
+  // Posts to the Supabase "waitlist" Edge Function (London). Leave ENDPOINT empty
+  // and the page only validates locally (draft mode: nothing is sent).
+  const ENDPOINT = 'https://cpvcygkgzbohdeazehmi.supabase.co/functions/v1/waitlist/join';
+  const form = document.getElementById('waitlist');
+  const status = document.getElementById('status');
+  const button = form.querySelector('button');
+  const say = (kind, text) => { status.dataset.kind = kind; status.textContent = text; };
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = form.email.value.trim();
+    const problems = [];
+    if (!form.name.value.trim()) problems.push('your first name');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) problems.push('a valid email address');
+    const area = form.postcode_area.value.trim().toUpperCase();
+    if (area && !/^[A-Z]{1,2}[0-9][0-9A-Z]?$/.test(area)) problems.push('just the first part of your postcode (like N14), or leave it blank');
+    if (!form.consent.checked) problems.push('to tick the box so we can email you');
+    if (problems.length) return say('error', 'Nearly there. We need ' + problems.join(', ') + '.');
+    if (!ENDPOINT) {
+      say('ok', 'Thank you. (Draft page: nothing was sent.) We\u2019d email ' + email + ' when your place is ready.');
+      return form.reset();
+    }
+    button.disabled = true;
+    say('ok', 'Adding you to the list\u2026');
+    try {
+      const res = await fetch(ENDPOINT, {
+        method: 'POST', headers: { 'content-type': 'application/json' },
+        body: JSON.stringify({ name: form.name.value, email, relationship: form.relationship.value,
+          postcode_area: area, consent: form.consent.checked, website: form.website.value, source: 'waitlist-page' }),
+      });
+      if (res.ok) {
+        say('ok', 'Thank you, you\u2019re on the list. We\u2019ve sent a short confirmation to ' + email + '. If it isn\u2019t there in a few minutes, check your junk folder.');
+        form.reset();
+      } else if (res.status === 422) {
+        say('error', 'Something in the form needs another look. Please check your email address and postcode area, then try again.');
+      } else {
+        say('error', 'Sorry, we couldn\u2019t add you just now. Please try again in a few minutes, or email AuntyAnne@galactik.tech and we\u2019ll add you by hand.');
+      }
+    } catch {
+      say('error', 'We couldn\u2019t reach our server. Please check your connection and try again, or email AuntyAnne@galactik.tech.');
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
