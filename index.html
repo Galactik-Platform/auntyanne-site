@@ -4,8 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Aunty Anne · Founding families</title>
-<meta name="description" content="Cara is an AI companion who phones someone you love for a friendly chat and a simple game. Join the founding families waitlist.">
+<meta name="description" content="Cara is an AI companion who phones someone you love for a friendly chat, and hosts family game night when you are together. Join the founding families waitlist.">
 <meta name="theme-color" content="#1e4335">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://auntyanne.galactik.tech/">
+<meta property="og:title" content="Aunty Anne · Meet Cara">
+<meta property="og:description" content="A friendly phone call for someone you love, and family game night hosted by Cara. Join the founding families waitlist.">
+<meta property="og:image" content="https://auntyanne.galactik.tech/images/og-1200x630.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cara, the Aunty Anne AI companion, on a forest green background">
+<meta name="twitter:card" content="summary_large_image">
 <style>
   /* Colours and type match the Aunty Anne app (Base44 theme). Recoleta and
      Helvetica are used only if installed on the visitor's device (they are
@@ -37,7 +46,15 @@
   .skip { position: absolute; left: -999px; }
   .skip:focus { left: 1rem; top: 1rem; background: #fff; padding: .5rem 1rem; z-index: 10; }
 
-  header { padding: 1.5rem 0 0; }
+  header { padding: 1.25rem 1rem .5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .btn { display: inline-block; font: 600 1.05rem var(--sans); background: var(--green); color: #fff; text-decoration: none;
+         border-radius: var(--radius); padding: .9rem 1.4rem; }
+  .btn:hover { background: var(--green-dark); }
+  .btn.small { font-size: .9rem; padding: .55rem 1rem; }
+  .hero-cta { margin: 1.75rem 0 0; }
+  .games { background: #fff; }
+  .games .tags { list-style: none; padding: 0; margin: 1.25rem 0 0; display: flex; flex-wrap: wrap; gap: .5rem; }
+  .games .tags li { background: var(--paper-deep); color: var(--green); border-radius: 999px; padding: .35rem .9rem; font-size: .95rem; }
   .mark { font: 600 1.35rem/1 var(--serif); letter-spacing: .01em; color: var(--green); text-decoration: none; }
   .mark span { color: var(--sun); }
 
@@ -100,6 +117,38 @@
   .status[data-kind=ok] { display: block; background: var(--paper-deep); color: var(--accent-ink); }
   .status[data-kind=error] { display: block; background: #f7e4dc; color: #8a3517; }
 
+  .hear { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem;
+          box-shadow: 0 2px 10px hsl(159 38% 19% / .06); }
+  .hear h2 { font: 600 1.25rem/1.3 var(--serif); margin: 0 0 .35rem; }
+  .hear .play { display: inline-flex; align-items: center; gap: .6rem; margin: .75rem 0 .5rem; }
+  .hear .play span[aria-hidden] { display: inline-grid; place-items: center; width: 1.6rem; height: 1.6rem; border-radius: 50%;
+          background: #fff; color: var(--green); font-size: .8rem; }
+  .hear .label { font-size: .85rem; color: var(--ink-soft); margin: 0; }
+  .hear details { margin-top: 1rem; font-size: .92rem; }
+  .hear summary { cursor: pointer; color: var(--green); font-weight: 600; }
+  .hear details p { margin: .5rem 0; }
+  .packs { display: grid; gap: 1.25rem; margin: 0; padding: 0; list-style: none; }
+  @media (min-width: 52rem) { .packs { grid-template-columns: repeat(3, 1fr); } }
+  .pack { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 1.5rem; position: relative;
+          display: flex; flex-direction: column; }
+  .pack.popular { border: 2px solid var(--green); }
+  .pack .badge { position: absolute; top: -.8rem; left: 1.25rem; background: var(--green); color: #fff; font-size: .8rem;
+          font-weight: 650; padding: .2rem .7rem; border-radius: 999px; }
+  .pack h3 { font: 600 1.3rem/1.2 var(--serif); margin: 0; }
+  .pack .price { font: 500 2rem/1 var(--serif); margin: .75rem 0 .25rem; }
+  .pack .price small { font: 400 1rem var(--sans); color: var(--ink-soft); }
+  .pack .freq { margin: 0 0 .75rem; color: var(--green); font-weight: 600; }
+  .pack ul { padding-left: 1.1rem; margin: 0 0 1.25rem; flex: 1; }
+  .pack li { margin: .35rem 0; }
+  .terms { margin-top: 1.5rem; color: var(--ink-soft); font-size: .95rem; }
+  .terms p { margin: .3rem 0; }
+  .terms strong { color: var(--ink); }
+  .gamesonly { margin-top: 2rem; background: var(--paper-deep); border-radius: var(--radius); padding: 1.25rem 1.5rem;
+          display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; }
+  .gamesonly p { margin: 0; }
+  .founder blockquote { margin: 0; max-width: 40rem; border-left: 4px solid var(--green); padding: .25rem 0 .25rem 1.25rem; }
+  .founder blockquote p { font: 400 1.15rem/1.6 var(--serif); margin: 0 0 1rem; }
+  .founder cite { font-style: normal; font-weight: 600; color: var(--green); }
   footer { border-top: 1px solid var(--line); padding: 2rem 0 3rem; font-size: .85rem; color: var(--ink-soft); }
   footer p { margin: .3rem 0; }
 </style>
@@ -108,6 +157,7 @@
 <a class="skip" href="#join">Skip to the waitlist form</a>
 <header class="wrap">
   <a class="mark" href="#">Aunty Anne<span>.</span></a>
+  <a class="btn small" href="#join">Join the waitlist</a>
 </header>
 
 <main>
@@ -121,21 +171,26 @@
         <p><strong>Meet Cara</strong>Your family’s AI companion</p>
       </div>
       <h1>A friendly phone call for someone you love, even on the days you can’t ring.</h1>
-      <p class="lede">Cara rings your mum, dad, or the relative who lives alone, for a chat about their day and a gentle game of words or memories. You choose when. They choose whether.</p>
+      <p class="lede">Cara rings your mum, dad, or the relative who lives alone, for a chat about their day on the days you can’t. And when you’re all together, she hosts family game night. You choose when. They choose whether.</p>
       <p class="ai-note"><strong>Cara is an AI companion, not a person.</strong> She says so at the start of every call.</p>
+      <p class="hero-cta"><a class="btn" href="#join">Join the founding families</a></p>
     </div>
 
-    <aside class="offer" aria-labelledby="offer-h">
-      <h2 id="offer-h">Founding families</h2>
-      <p style="margin:0;color:var(--ink-soft)">Places for our first 20 families</p>
-      <p class="price">£29 <small>a month</small></p>
-      <ul>
-        <li>About two chats a week (100 minutes a month)</li>
-        <li>Your price stays the same for 12 months</li>
-        <li>30-day money-back guarantee</li>
-      </ul>
-      <p class="fine">Joining the waitlist is free and doesn’t commit you to anything. We’ll email you when your place is ready.</p>
-      <p style="margin:1rem 0 0"><a href="#join">Join the waitlist</a></p>
+    <aside class="hear" aria-labelledby="hear-h">
+      <h2 id="hear-h">Hear Cara</h2>
+      <p style="margin:0;color:var(--ink-soft)">A 38-second example call, with a quick game at the end.</p>
+      <button type="button" class="play" id="hear-btn" aria-controls="hear-audio" aria-pressed="false"><span aria-hidden="true">▶</span> <span id="hear-btn-text">Play the example call</span></button>
+      <p class="label">Example call. Both voices are AI. No real customer.</p>
+      <audio id="hear-audio" preload="none" src="audio/hear-cara-38s.m4a"></audio>
+      <details>
+        <summary>Read the call</summary>
+        <p><b>Cara:</b> Hello Margaret, it’s Cara! I thought I’d give you a little ring. How are you today?</p>
+        <p><b>Margaret (example):</b> Oh, hello love! I’m grand, thanks. I’ve just had my lunch.</p>
+        <p><b>Cara:</b> Ah, lovely. And did the tulips come up in the end?</p>
+        <p><b>Margaret (example):</b> They did! Yellow ones, all along the front. Lovely, they are.</p>
+        <p><b>Cara:</b> Oh, I’d love to see them. Fancy a quick game? I’ll name a decade, you tell me something you remember. The fifties!</p>
+        <p><b>Margaret (example):</b> Ooh, the fifties! Dancing at the Palais on a Saturday night.</p>
+      </details>
     </aside>
   </div>
 
@@ -151,13 +206,64 @@
     </div>
   </section>
 
+  <section class="games" aria-labelledby="games-h">
+    <div class="wrap">
+      <h2 class="sec" id="games-h">Play with Cara: family game night, hosted by Cara</h2>
+      <p class="lede" style="margin:-.75rem 0 0">Put one phone, tablet or laptop in the middle of the table and Cara hosts a quick word game for everyone, grown-ups and grandparents included. She asks everyone’s name first. No scores, no wrong answers.</p>
+      <ul class="tags" aria-label="The games">
+        <li>Name Three Things</li><li>This or That</li><li>Finish the Saying</li><li>What Rhymes With</li>
+      </ul>
+      <p class="hint" style="margin-top:1rem">One microphone hears the whole room, and Cara can’t tell voices apart, so she’ll sometimes ask who said what.</p>
+    </div>
+  </section>
+
+  <section aria-labelledby="packs-h">
+    <div class="wrap">
+      <h2 class="sec" id="packs-h">Choose your pack</h2>
+      <p class="lede" style="margin:-.75rem 0 2rem">Every pack includes Cara’s calls and family game night. Use your minutes however suits your family.</p>
+      <ul class="packs">
+        <li class="pack"><h3>Bronze</h3><p class="price">£29.99 <small>a month</small></p><p class="freq">Two calls a week</p>
+          <ul><li>Cara rings twice a week, for up to 15 minutes</li><li>About 120 minutes a month, for calls or family games</li><li>Top up any time</li></ul>
+          <a class="btn" href="#join">Join the waitlist</a></li>
+        <li class="pack popular"><span class="badge">Most popular</span><h3>Silver</h3><p class="price">£49.99 <small>a month</small></p><p class="freq">Four calls a week</p>
+          <ul><li>Cara rings four times a week, for up to 15 minutes</li><li>About 240 minutes a month, for calls or family games</li><li>Top up any time</li></ul>
+          <a class="btn" href="#join">Join the waitlist</a></li>
+        <li class="pack"><h3>Gold</h3><p class="price">£79.99 <small>a month</small></p><p class="freq">A call every day</p>
+          <ul><li>Cara rings every day, for up to 15 minutes</li><li>About 450 minutes a month, for calls or family games</li><li>Top up any time</li></ul>
+          <a class="btn" href="#join">Join the waitlist</a></li>
+      </ul>
+      <div class="terms">
+        <p>One set of minutes, two ways to use them. Spend them on Cara’s calls, on family game night with Cara, or a bit of both.</p>
+        <p>Need more? Top up 30 minutes for £7.99, whenever you like.</p>
+        <p><strong>Monthly, no contract. Cancel any time. 30-day money-back guarantee.</strong></p>
+        <p>Joining the waitlist is free and doesn’t commit you to anything. We’ll email you when your place is ready.</p>
+      </div>
+      <div class="gamesonly">
+        <p><strong>Just here for the games?</strong> Family game night with Cara, £7.99 for 30 minutes. No subscription. Makes a lovely gift, too.</p>
+        <a class="btn small" href="#join">Join the waitlist</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="founder" aria-labelledby="founder-h">
+    <div class="wrap">
+      <h2 class="sec" id="founder-h">Why I made Aunty Anne</h2>
+      <blockquote>
+        <p>We all live busy lives, and it means we can’t spend as much time with the people we love as we’d like to.</p>
+        <p>My Aunty Anne is my best friend. She lives alone, and although she’s looked after and loved, I wish I could spend more time with her. She loves playing games with me, and she’s brilliant at them.</p>
+        <p>So I made this for her, to bring a smile to her face every day. I hope it brings one to yours too.</p>
+        <cite>Jamie Donnelly, founder</cite>
+      </blockquote>
+    </div>
+  </section>
+
   <section class="honest" aria-labelledby="honest-h">
     <div class="wrap">
       <h2 class="sec" id="honest-h">The honest bits</h2>
       <dl>
         <div><dt>Cara is a computer</dt><dd>She’s warm and patient, but she isn’t a person, and she never pretends to be.</dd></div>
         <div><dt>“Stop” always works</dt><dd>If the person Cara calls says stop, the calls stop. Only they, or someone with legal authority for them, can start them again.</dd></div>
-        <div><dt>Not an emergency service</dt><dd>If something sounds wrong, Cara tells them to call 999 and lets you know straight away.</dd></div>
+        <div><dt>Not an emergency service</dt><dd>If something sounds wrong, Cara tells them to call 999 and lets the family contacts you choose know.</dd></div>
         <div><dt>Never asks for money</dt><dd>Cara never asks for money, bank details or passwords. Anyone who does isn’t Cara.</dd></div>
       </dl>
     </div>
@@ -187,7 +293,7 @@
           </select>
         </div>
         <div>
-          <label for="area">Postcode area <span class="hint">Optional. Just the first part, e.g. N14. It helps us plan local set-up visits.</span></label>
+          <label for="area">Postcode area <span class="hint">Optional. Just the first part, e.g. N14. It helps us plan where to start.</span></label>
           <input id="area" name="postcode_area" type="text" inputmode="text" maxlength="4" autocomplete="off">
         </div>
         <p class="no-health">Please don’t tell us anything about their health here. We don’t need it yet.</p>
@@ -253,6 +359,15 @@
       button.disabled = false;
     }
   });
+</script>
+<script>
+  (function () {
+    var b = document.getElementById('hear-btn'), a = document.getElementById('hear-audio'), t = document.getElementById('hear-btn-text');
+    if (!b || !a) return;
+    function sync() { var on = !a.paused; b.setAttribute('aria-pressed', String(on)); t.textContent = on ? 'Pause' : 'Play the example call'; b.firstElementChild.textContent = on ? '❚❚' : '▶'; }
+    b.addEventListener('click', function () { if (a.paused) { a.play().catch(function () {}); } else { a.pause(); } });
+    a.addEventListener('play', sync); a.addEventListener('pause', sync); a.addEventListener('ended', sync);
+  })();
 </script>
 </body>
 </html>
