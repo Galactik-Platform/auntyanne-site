@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>I'm on it · Aunty Anne</title>
+<style>
+  :root { --paper:#f6f1e7; --ink:#1f2a24; --soft:#4a564f; --green:#2f5a46; --focus:#1d4ed8; --radius:6px;
+          --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+          --sans:-apple-system,"Segoe UI",system-ui,Roboto,Helvetica,Arial,sans-serif; }
+  html { font-size:112.5%; }
+  body { margin:0; background:var(--paper); color:var(--ink); font:1rem/1.65 var(--sans); }
+  main { max-width:34rem; margin:0 auto; padding:2rem 1rem 4rem; }
+  a { color:var(--green); text-underline-offset:3px; }
+  a:focus-visible, button:focus-visible { outline:3px solid var(--focus); outline-offset:2px; }
+  .mark { font:600 1.35rem/1 var(--serif); color:var(--green); text-decoration:none; }
+  h1 { font:500 2rem/1.2 var(--serif); margin:2rem 0 1rem; }
+  .emergency { border-left:4px solid #b4532a; padding:.25rem 0 .25rem .9rem; margin:1.25rem 0; }
+  button { font:600 1.1rem var(--sans); background:var(--green); color:#fff; border:0; border-radius:var(--radius);
+           padding:1rem 1.5rem; cursor:pointer; width:100%; max-width:22rem; }
+  button:disabled { opacity:.6; cursor:progress; }
+  .status { padding:.8rem 1rem; border-radius:var(--radius); margin-top:1rem; background:#f7e4dc; color:#8a3517; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<main>
+  <a class="mark" href="/">Aunty Anne</a>
+
+  <section id="ask">
+    <h1>Are you checking on them?</h1>
+    <p>Cara, the AI companion, was worried after a call. Press the button to let the family know you're dealing with it. It also stops our follow-up phone calls.</p>
+    <p class="emergency"><strong>If they may be in danger, call 999 now.</strong></p>
+    <button type="button" id="ack">I'm on it</button>
+    <p class="status" id="status" role="status" aria-live="polite" hidden></p>
+  </section>
+
+  <section id="done" hidden>
+    <h1>Thank you</h1>
+    <p>We've recorded that you're dealing with it, and the follow-up calls have stopped. The family can see this in the Aunty Anne app.</p>
+    <p class="emergency"><strong>If they may be in danger, call 999.</strong></p>
+  </section>
+
+  <section id="badlink" hidden>
+    <h1>This link isn't complete</h1>
+    <p>Please use the whole link from the text message. If you are worried about someone, check on them directly, and if they may be in danger, call 999.</p>
+  </section>
+</main>
+<script>
+  const ENDPOINT = 'https://checkmate-money-guard.base44.app/functions/acknowledgeIncident';
+  const token = new URLSearchParams(location.search).get('t') || '';
+  const $ = (id) => document.getElementById(id);
+  const show = (id) => { for (const s of ['ask', 'done', 'badlink']) $(s).hidden = s !== id; };
+  if (!/^[A-Za-z0-9_-]{32}$/.test(token)) show('badlink');
+  history.replaceState(null, '', location.pathname);
+  $('ack').addEventListener('click', async () => {
+    const button = $('ack'), status = $('status');
+    button.disabled = true; status.hidden = true;
+    try {
+      // Plain-text body: a "simple" request, so no CORS preflight is needed.
+      const res = await fetch(ENDPOINT, { method: 'POST', body: token });
+      if (res.ok) return show('done');
+      if (res.status === 400 || res.status === 404) return show('badlink');
+      throw new Error(String(res.status));
+    } catch {
+      status.textContent = "Sorry, that didn't go through. Please try again, and check on them directly in the meantime. If they may be in danger, call 999.";
+      status.hidden = false;
+      button.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
