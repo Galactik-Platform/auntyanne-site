@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Leave the waitlist · Aunty Anne</title>
+<style>
+  :root { --paper:#f6f1e7; --ink:#1f2a24; --soft:#4a564f; --green:#2f5a46; --focus:#1d4ed8; --radius:6px;
+          --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+          --sans:-apple-system,"Segoe UI",system-ui,Roboto,Helvetica,Arial,sans-serif; }
+  html { font-size:112.5%; }
+  body { margin:0; background:var(--paper); color:var(--ink); font:1rem/1.65 var(--sans); }
+  main { max-width:34rem; margin:0 auto; padding:2rem 1rem 4rem; }
+  a { color:var(--green); text-underline-offset:3px; }
+  a:focus-visible, button:focus-visible { outline:3px solid var(--focus); outline-offset:2px; }
+  .mark { font:600 1.35rem/1 var(--serif); color:var(--green); text-decoration:none; }
+  h1 { font:500 2rem/1.2 var(--serif); margin:2rem 0 1rem; }
+  button { font:600 1.05rem var(--sans); background:var(--green); color:#fff; border:0; border-radius:var(--radius);
+           padding:.9rem 1.4rem; cursor:pointer; }
+  button:hover { background:#24493a; }
+  button:disabled { opacity:.6; cursor:progress; }
+  .status { padding:.8rem 1rem; border-radius:var(--radius); margin-top:1rem; }
+  .status[data-kind=error] { background:#f7e4dc; color:#8a3517; }
+  [hidden] { display:none !important; }
+</style>
+</head>
+<body>
+<main>
+  <a class="mark" href="/">Aunty Anne</a>
+
+  <section id="ask">
+    <h1>Leave the founding families waitlist?</h1>
+    <p>This deletes your name and email from the list straight away. We won’t email you again.</p>
+    <button type="button" id="remove">Remove me from the list</button>
+    <p class="status" id="status" role="status" aria-live="polite" hidden></p>
+  </section>
+
+  <section id="done" hidden>
+    <h1>You’ve been removed</h1>
+    <p>Your details are deleted from the waitlist and we won’t email you again. Thank you for your interest in Aunty Anne.</p>
+    <p><a href="/">Back to Aunty Anne</a></p>
+  </section>
+
+  <section id="badlink" hidden>
+    <h1>This link isn’t complete</h1>
+    <p>Please use the whole link from our email. Or email <a href="mailto:AuntyAnne@galactik.tech">AuntyAnne@galactik.tech</a> and we’ll remove you by hand.</p>
+  </section>
+</main>
+<script>
+  const ENDPOINT = 'https://cpvcygkgzbohdeazehmi.supabase.co/functions/v1/waitlist/unsubscribe';
+  const token = new URLSearchParams(location.search).get('t') || '';
+  const $ = (id) => document.getElementById(id);
+  const show = (id) => { for (const s of ['ask', 'done', 'badlink']) $(s).hidden = s !== id; };
+  if (!/^[A-Za-z0-9_-]{43}$/.test(token)) show('badlink');
+  // Keep the token out of the address bar and browser history once read.
+  history.replaceState(null, '', location.pathname);
+  $('remove').addEventListener('click', async () => {
+    const button = $('remove'), status = $('status');
+    button.disabled = true;
+    status.hidden = true;
+    try {
+      const res = await fetch(ENDPOINT + '?t=' + encodeURIComponent(token), { method: 'POST' });
+      if (res.ok) return show('done');
+      if (res.status === 400) return show('badlink');
+      throw new Error(String(res.status));
+    } catch {
+      status.dataset.kind = 'error';
+      status.textContent = 'Sorry, that didn’t work just now. Please try again in a minute, or email AuntyAnne@galactik.tech and we’ll remove you by hand.';
+      status.hidden = false;
+      button.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
